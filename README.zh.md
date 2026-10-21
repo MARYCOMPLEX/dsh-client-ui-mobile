@@ -33,6 +33,12 @@ dsh plugin --profile web add github:MARYCOMPLEX/dsh-client-ui-mobile
 
 然后在 **设置 → 插件** 里启用 `mobile-ui` 组合包。启用组合包会把它的 patch 层追加进 profile，自动插入 loader 条目。
 
+要锁定版本（可复现安装）：
+
+```bash
+dsh plugin --profile web add "github:MARYCOMPLEX/dsh-client-ui-mobile#v0.1.0"
+```
+
 如果你的 profile 关闭了配置热重载，之后重启一次 `dsh web`。
 
 ### 作为普通条目

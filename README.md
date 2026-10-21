@@ -33,6 +33,12 @@ dsh plugin --profile web add github:MARYCOMPLEX/dsh-client-ui-mobile
 
 Then open **Settings → Plugins** and enable the `mobile-ui` bundle. Enabling a bundle appends its patch layer, which inserts the loader row for you.
 
+Pin a release for reproducibility:
+
+```bash
+dsh plugin --profile web add "github:MARYCOMPLEX/dsh-client-ui-mobile#v0.1.0"
+```
+
 If your profile runs with configuration HMR disabled, restart `dsh web` afterwards.
 
 ### As a plain row
