@@ -1,0 +1,5 @@
+# Bundle layer: one loader row for the mobile client plugin.
+# Enabling this bundle is enough — no hand-edited profile patch needed.
+- insert:
+    - id: mobile-ui
+      name: 'dsh-client-ui-mobile'

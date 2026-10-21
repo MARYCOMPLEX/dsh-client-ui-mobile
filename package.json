@@ -1,0 +1,54 @@
+{
+  "name": "dsh-client-ui-mobile",
+  "version": "0.1.0",
+  "description": "Mobile adaptation for the DeepSeek Harness Web GUI: phone layout, overlay sidebar drawer, bottom navigation and a manual Desktop/Mobile switch.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "mobile",
+    "responsive"
+  ],
+  "license": "MIT",
+  "author": "Jyun (https://github.com/MARYCOMPLEX)",
+  "homepage": "https://github.com/MARYCOMPLEX/dsh-client-ui-mobile#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MARYCOMPLEX/dsh-client-ui-mobile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MARYCOMPLEX/dsh-client-ui-mobile/issues"
+  },
+  "icon": "./icon.svg",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "scripts": {
+    "test": "node test/smoke.mjs"
+  }
+}
