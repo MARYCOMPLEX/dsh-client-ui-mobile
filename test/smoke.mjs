@@ -69,8 +69,14 @@ const ctx = {
 	}
 };
 
+const htmlAttrs = new Set();
 const document = {
-	documentElement: { lang: "zh-CN" },
+	documentElement: {
+		lang: "zh-CN",
+		toggleAttribute: (name, on) => (on ? htmlAttrs.add(name) : htmlAttrs.delete(name)),
+		removeAttribute: (name) => htmlAttrs.delete(name),
+		hasAttribute: (name) => htmlAttrs.has(name)
+	},
 	createElement: () => ({ dataset: {}, textContent: "" }),
 	head: { appendChild: (el) => calls.styles.push(el) },
 	querySelector: () => null,
@@ -83,6 +89,11 @@ exports.apply(ctx);
 if (calls.styles.length !== 1) throw new Error("stylesheet not injected: " + calls.styles.length);
 if (!calls.styles[0].dataset.pluginCss?.endsWith("/mobile.css")) throw new Error("bad style tag");
 if (!calls.styles[0].textContent.includes("@media (max-width: 768px)")) throw new Error("stylesheet lost its media query");
+if (!calls.styles[0].textContent.includes('[data-shortcut-modal="settings"]')) throw new Error("settings modal rules missing");
+if (process.env.DSHM_DUMP_CSS) {
+	const { writeFileSync } = await import("node:fs");
+	writeFileSync(process.env.DSHM_DUMP_CSS, calls.styles[0].textContent);
+}
 if (!calls.injected.includes("shell.bottom")) throw new Error("did not inject into shell.bottom");
 const nav = calls.registered.find((entry) => entry.options.name === "shell.bottom");
 if (!nav || typeof nav.component !== "function") throw new Error("shell.bottom component not registered");
@@ -131,7 +142,9 @@ if (sidebar.getAttribute("data-dshm-col") !== "sidebar") throw new Error("sideba
 if (center.getAttribute("data-dshm-col") !== "center") throw new Error("centre column not pinned -> content lands in a 0px track");
 if (rightbar.getAttribute("data-dshm-col") !== "rightbar") throw new Error("rightbar column not pinned");
 if (bottom.hasAttribute("data-dshm-col")) throw new Error("bottom row must stay auto-placed");
+if (!document.documentElement.hasAttribute("data-dshm-mobile")) throw new Error("switch flag not published on <html>");
 tag(frame, false);
+if (document.documentElement.hasAttribute("data-dshm-mobile")) throw new Error("switch flag left on <html> after disable");
 for (const node of frame.children) {
 	if (node.hasAttribute("data-dshm-col") || node.hasAttribute("data-dshm-sidebar")) throw new Error("tag left behind after disable");
 }

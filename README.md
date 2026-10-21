@@ -22,6 +22,7 @@ Everything below applies at **≤ 768px viewport width**; wider viewports are le
 | Composer | 16px inputs so iOS does not zoom on focus; the frame shrinks by the on-screen keyboard height via `visualViewport` |
 | Layout | `100dvh` heights, `env(safe-area-inset-*)` padding for notches and gesture bars |
 | Wide content | `pre` and `table` scroll inside their own box instead of widening the page |
+| Settings | The settings modal becomes a full-screen sheet; its 188px side nav turns into a horizontal, scrollable tab strip |
 
 ## Install
 

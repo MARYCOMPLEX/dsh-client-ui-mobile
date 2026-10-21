@@ -1,6 +1,6 @@
 {
   "name": "dsh-client-ui-mobile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Mobile adaptation for the DeepSeek Harness Web GUI: phone layout, overlay sidebar drawer, bottom navigation and a manual Desktop/Mobile switch.",
   "keywords": [
     "dsh",
